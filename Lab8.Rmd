@@ -1,0 +1,15 @@
+---
+title: "LA_8"
+author: "Adam Hayes, Richard Park, Jasmine Sanchez, Erin Omyer"
+date: "3/6/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+data <- read_csv("data.csv")
+```
+

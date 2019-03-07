@@ -7,17 +7,11 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
-```
-
-```{r}
 library(tidyverse)
 library(data.table)
-data <- fread("data.csv", na.strings = c("--"))%>%
-  rename(Uploads = "Video Uploads", Views = "Video views")
-#data <- na.omit(data)
-
-
 ```
+
+
 
 ##What factors lead a YouTube channel to be successful?
 This is important because there are so many YouTube channels out there, and for people trying to create their own channel, and for YouTube itself, it is interesting to know what influences certain channels to become successful.  YouTube may want to help certain channels get off the ground if they display certain characteristics that have translated to success.  Also, knowing which characteristics correlate with success will give users a better ground to start on when creating their own YouTube channel.
@@ -44,7 +38,11 @@ Our domain expert is the CEO of YouTube, and he wants to know what factors are l
 ###Adam's Findings
 
 ```{r}
-data2 <- data %>%
+dataAdam <- fread("data.csv", na.strings = c("--"))%>%
+  rename(Uploads = "Video Uploads", Views = "Video views")
+
+
+data2 <- dataAdam %>%
   separate(Rank, into = c("rank","word"), sep = -2)%>%
   select(-word)
 

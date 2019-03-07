@@ -6,10 +6,67 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 ```
 
 ```{r}
-data <- read_csv("data.csv")
+library(tidyverse)
+library(data.table)
+data <- fread("data.csv", na.strings = c("--"))%>%
+  rename(Uploads = "Video Uploads", Views = "Video views")
+#data <- na.omit(data)
+
+
 ```
 
+##What factors lead a YouTube channel to be successful?
+This is important because there are so many YouTube channels out there, and for people trying to create their own channel, and for YouTube itself, it is interesting to know what influences certain channels to become successful.  YouTube may want to help certain channels get off the ground if they display certain characteristics that have translated to success.  Also, knowing which characteristics correlate with success will give users a better ground to start on when creating their own YouTube channel.
+
+###Our Dataset
+Our dataset contains the top 5000 rated YouTube channels by Socialblade.
+
+https://www.kaggle.com/mdhrumil/top-5000-youtube-channels-data-from-socialblade
+
+vars:
+Rank = the Socialblade rankings of the YouTube channel.
+Grade =  the grade of the YouTube channel as conferred by Socialblade.
+Channel name = The name of the YouTube channel.
+Video Uploads = Total number of videos uploaded by the YouTube channel.
+Subscribers = Total number of subscribers of the YouTube channel.
+Video views = Total number of views of all the video content by the YouTube channel.
+
+
+
+
+###Adam's Findings
+
+```{r}
+data2 <- data %>%
+  separate(Rank, into = c("rank","word"), sep = -2)%>%
+  select(-word)
+
+data2$Uploads <- as.numeric(data2$Uploads)
+data2$Views <- as.numeric(data2$Views)
+data2$Subscribers <- as.numeric(data2$Subscribers)
+data2$rank <- as.numeric(data2$rank)
+
+data3 <- data2 %>%
+  mutate(rate = Subscribers / Uploads)
+
+
+
+ggplot(data = data3, mapping = aes(x = rate, y = Uploads ))+
+  geom_point(position = "jitter")+
+  xlim(0,100)+
+  labs(title = "Rate of Subscribers:Uploads vs. # of Uploads")
+
+
+
+ggplot(data = data3, mapping = aes(x = rank, y = Uploads))+
+  geom_point()+
+  ylim(0,100000)+
+  labs(title = "Channel Rank vs. # of Uploads")
+```
+
+####Comments
+I explored how the number of uploads a channel has effects the overall success of the channel.  In the first graph I created a new rate variable that represented the number of subscribers per upload, and when I compared that with how many uploads each channel has I found that the rate tends to be much higher with less uploads, and much lower when a channel has more uploads.  In the second graph, I compared the channel rank with it's number of uploads, and found that the number of uploads does not correlate at all with a channels rank, as some channels with very good rankings have very little uploads while others with good rankings have high uploads.

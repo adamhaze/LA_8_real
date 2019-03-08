@@ -25,16 +25,20 @@ vars:
 Rank = the Socialblade rankings of the YouTube channel.
 Grade =  the grade of the YouTube channel as conferred by Socialblade.
 Channel name = The name of the YouTube channel.
-Uploads = Total number of videos uploaded by the YouTube channel.
+Video Uploads = Total number of videos uploaded by the YouTube channel.
 Subscribers = Total number of subscribers of the YouTube channel.
-Views = Total number of views of all the video content by the YouTube channel.
-RankBasedOnSubscriberRatw = The rank of Youtube channel based on # of Subscribers 
+Video views = Total number of views of all the video content by the YouTube channel.
+RankBasedOnSubscriberRate = The rank of Youtube channel based on # of Subscribers 
+rate = rate of subscribers per upload
 
 
 ###Domain Expert
 Our domain expert is the CEO of YouTube, and he wants to know what factors are leading to certain YouTube channels becoming more successful based on Socialblade's rankings.  It is interesting to him what a major blogger company like Socialblade finds important in certain YouTube channels because he believes it influences the way users look at and evaluate channels.  He wants to know which channels he should focus his sponsorships towards in order to increase YouTube's overall success.  
 
+###Conclusion
+We found that, independently, the # of uploads and # of subscribers has little effect on the overall ranking, or success, of a YouTube channel. But, from our data we would conclude that YouTube channels with less uploads and more subscribers, so a higher subscriber to upload rate tend to be more successful.  This is because channels are more successful when they put out higher quality uploads, rather than just mass uploading videos.  These channels are generating much higher subscriber numbers with less video uploads, therefore they are becoming much more successful much quicker.
 
+###Recommendation
 
 ###Adam's Findings
 
@@ -133,3 +137,4 @@ As depicted from the graph above, the top 1000 youtube channels (based on rank) 
 
 ###Overall Summary Of Group Work
 The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. Richard also created a graph depicting a relatively random relationship among subscribers and the Socialblade ranking it was assigned. This means that there was no significant effect on ranking just based on the amount of subscribers a Youtube channel had.This why Richard's plot showed no patterns and was highly scattered.
+Adam typed out the introduction section and helped with the conclusion. In his section he imported the data with fread(), and changed a couple variable names using rename() and changed the type of certain variables from chr to dbl by using as.numeric(). He also separated the Rank column by taking off the last two characters, and then using the select() func to remove that column so that the rank column could be converted to a double. He also used the mutate function to add a rate variable that divided the Subscribers by the # of uploads for each channel.  He then used ggplot to plot 2 different comparisons based on number of uploads.

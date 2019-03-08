@@ -71,3 +71,34 @@ ggplot(data = data3, mapping = aes(x = rank, y = Uploads))+
 
 ####Comments
 I explored how the number of uploads a channel has effects the overall success of the channel.  In the first graph I created a new rate variable that represented the number of subscribers per upload, and when I compared that with how many uploads each channel has I found that the rate tends to be much higher with less uploads, and much lower when a channel has more uploads.  In the second graph, I compared the channel rank with it's number of uploads, and found that the number of uploads does not correlate at all with a channels rank, as some channels with very good rankings have very little uploads while others with good rankings have high uploads.
+
+
+###Erin's Findings
+
+```{r}
+data <- read_csv("data.csv")
+data1 <- data %>% unite("Rank Grade", into = c("Rank","Grade"),sep = "-")
+data1 <- data %>% rename(VideoUploads = "Video Uploads", VideoViews = "Video views") 
+
+data1$VideoUploads <- as.numeric(data1$VideoUploads)
+data1$Subscribers <- as.numeric(data1$Subscribers)
+data1$VideoViews <- as.numeric(data1$VideoViews)
+
+newData <- data1 %>%
+  unite("Rank Grade", into = c("Rank","Grade"), sep = "-") %>%
+  mutate(SubscriberViews_Rate = (Subscribers/VideoViews)) 
+
+ggplot(data = newData, mapping = aes(x = SubscriberViews_Rate, y = VideoViews)) + geom_point() + geom_smooth(position = "jitter") +
+  xlim(0,0.15) +
+  ylim(0,40000000000) +
+  labs(title = "Rate of Video Views for # of Subscribers")  
+
+
+```
+
+####Comments
+From the data graphed, it is comparing the Subscribers Viewer rate (Subscribers/VideoViews) to the number of Video Views they receive. In the graph displayed, the peak of the Subscribers Viewer rate is when the content creator was just beginning. When you start making videos, you begin with zero and then increase drastically, because you never had subscribers before. In my data, the values were concentrated in the beginning, so I had to make use of focusing the x values from 0 to 0.15 and the y values from 0 to 400000000. As well, the points on the graph were centralized to the 0 Subscriber Rate, so I placed "position = "jitter"" to ensure variance and better visualization of the plot. 
+
+
+###Overall Summary Of Group Work
+The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. 

@@ -28,6 +28,7 @@ Channel name = The name of the YouTube channel.
 Uploads = Total number of videos uploaded by the YouTube channel.
 Subscribers = Total number of subscribers of the YouTube channel.
 Views = Total number of views of all the video content by the YouTube channel.
+Uploaded videos = Total number number of uploaded videos by the Youtube channel. 
 
 
 ###Domain Expert
@@ -96,6 +97,9 @@ ggplot(data = newData, mapping = aes(x = SubscriberViews_Rate, y = VideoViews)) 
 
 ```
 
+####Comments
+From the data graphed, it is comparing the Subscribers Viewer rate (Subscribers/VideoViews) to the number of Video Views they receive. In the graph displayed, the peak of the Subscribers Viewer rate is when the content creator was just beginning. When you start making videos, you begin with zero and then increase drastically, because you never had subscribers before. In my data, the values were concentrated in the beginning, so I had to make use of focusing the x values from 0 to 0.15 and the y values from 0 to 400000000. As well, the points on the graph were centralized to the 0 Subscriber Rate, so I placed "position = "jitter"" to ensure variance and better visualization of the plot. 
+
 ### Richard's Findings
 
 ```{r}
@@ -118,11 +122,13 @@ dataYoutube1 <- dataYoutube %>%
    geom_point(position = "jitter")+
    xlim(0,1000)+
    ylim(0,5000)+
+   geom_smooth()
    labs(title = "Rank based on # of Uploaded videos")
 
 ```
+
 ####Comments
-From the data graphed, it is comparing the Subscribers Viewer rate (Subscribers/VideoViews) to the number of Video Views they receive. In the graph displayed, the peak of the Subscribers Viewer rate is when the content creator was just beginning. When you start making videos, you begin with zero and then increase drastically, because you never had subscribers before. In my data, the values were concentrated in the beginning, so I had to make use of focusing the x values from 0 to 0.15 and the y values from 0 to 400000000. As well, the points on the graph were centralized to the 0 Subscriber Rate, so I placed "position = "jitter"" to ensure variance and better visualization of the plot. 
+As depicted from the graph above, the top 1000 youtube channels (based on rank) were being compared to the number of subscribers they have. The graph depicts a highly scattered output which shows that there is no significant effect of the number of subscribers on a Youtube channels' rank (based on socialblade's rankings). I also utilized "position" = "jitter" to help with visualiztion of the plots on the graph.
 
 
 ###Overall Summary Of Group Work

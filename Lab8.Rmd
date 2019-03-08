@@ -28,7 +28,7 @@ Channel name = The name of the YouTube channel.
 Uploads = Total number of videos uploaded by the YouTube channel.
 Subscribers = Total number of subscribers of the YouTube channel.
 Views = Total number of views of all the video content by the YouTube channel.
-Uploaded videos = Total number number of uploaded videos by the Youtube channel. 
+RankBasedOnSubscriberRatw = The rank of Youtube channel based on # of Subscribers 
 
 
 ###Domain Expert
@@ -132,4 +132,4 @@ As depicted from the graph above, the top 1000 youtube channels (based on rank) 
 
 
 ###Overall Summary Of Group Work
-The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. 
+The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. Richard also created a graph depicting a relatively random relationship among subscribers and the Socialblade ranking it was assigned. This means that there was no significant effect on ranking just based on the amount of subscribers a Youtube channel had.This why Richard's plot showed no patterns and was highly scattered.

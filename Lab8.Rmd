@@ -96,6 +96,31 @@ ggplot(data = newData, mapping = aes(x = SubscriberViews_Rate, y = VideoViews)) 
 
 ```
 
+### Richard's Findings
+
+```{r}
+dataRichard <- read.csv("data.csv", na.strings = c("--"))
+dataRichard1 <- na.omit(dataRichard)
+dataYoutube <- dataRichard1 %>%
+  rename(UploadedVideos = "Video.Uploads", Views = "Video.views") %>%
+  separate(Rank, into = c("rank","word"), sep = -2)%>%
+  select(-word)
+  
+dataYoutube$UploadedVideos <- as.numeric(dataYoutube$UploadedVideos)
+dataYoutube$Views <- as.numeric(dataYoutube$Views)
+dataYoutube$Subscribers <- as.numeric(dataYoutube$Subscribers)
+dataYoutube$rank <- as.numeric(dataYoutube$rank)
+
+dataYoutube1 <- dataYoutube %>%
+  mutate(RankBasedOnSubscriberRate = (rank/Subscribers))
+  
+ ggplot(data = dataYoutube1, mapping = aes(x = rank, y = Subscribers))+ 
+   geom_point(position = "jitter")+
+   xlim(0,1000)+
+   ylim(0,5000)+
+   labs(title = "Rank based on # of Uploaded videos")
+
+```
 ####Comments
 From the data graphed, it is comparing the Subscribers Viewer rate (Subscribers/VideoViews) to the number of Video Views they receive. In the graph displayed, the peak of the Subscribers Viewer rate is when the content creator was just beginning. When you start making videos, you begin with zero and then increase drastically, because you never had subscribers before. In my data, the values were concentrated in the beginning, so I had to make use of focusing the x values from 0 to 0.15 and the y values from 0 to 400000000. As well, the points on the graph were centralized to the 0 Subscriber Rate, so I placed "position = "jitter"" to ensure variance and better visualization of the plot. 
 

@@ -35,6 +35,10 @@ J_data1 = Imported data with changed names of columns.
 subs = number of channels with less than 1000 subscribers.
 high_rank = highest ranking channels with the highest grades, the top 150 YouTube Channels.
 prob_1 = the number of 'subs' over the number of 'high_rank' YouTube channels.
+SubscriberViews_Rate = the rate for subscribers versus the views per video.
+dataErin = the data downloaded for the data in a tibble. 
+
+
 
 
 ###Domain Expert
@@ -44,6 +48,9 @@ Our domain expert is the CEO of YouTube, and he wants to know what factors are l
 We found that, independently, the # of uploads and # of subscribers has little effect on the overall ranking, or success, of a YouTube channel. But, from our data we can conclude that YouTube channels with less uploads and more subscribers, those with a higher subscriber to upload rate, tend to be more successful.  This is because channels are more successful when they put out higher quality uploads, rather than just mass uploading videos.  These channels are generating much higher subscriber numbers with less video uploads, therefore they are becoming much more successful much quicker. They are also becoming much more succesfull more quickly due to the amount of views that they are getting. While the number of subscribers does not increase, the views per video substantially increases which is due to the cirrcukation of content. This can be through not just their social media platform but through others like Twitter and Facebook as well. 
 
 ###Recommendation
+
+Our recommendation is to be consistent with posting of youtube videos to their channels. While we didn't find a correlation between the overall ranking based on the number of uploads and number of subscribers. It is based the content made by the creators, because they will receive more views for an interesting video. Our recommendation is to ensure high quality uploads to receive a higher amount of subscribers. 
+
 
 ###Adam's Findings
 
@@ -86,9 +93,9 @@ I explored how the number of uploads a channel has effects the overall success o
 ###Erin's Findings
 
 ```{r}
-data <- read_csv("data.csv")
-data1 <- data %>% unite("Rank Grade", into = c("Rank","Grade"),sep = "-")
-data1 <- data %>% rename(VideoUploads = "Video Uploads", VideoViews = "Video views") 
+dataErin <- read_csv("data.csv")
+data1 <- dataErin %>% unite("Rank Grade", into = c("Rank","Grade"),sep = "-")
+data1 <- dataErin %>% rename(VideoUploads = "Video Uploads", VideoViews = "Video views") 
 
 data1$VideoUploads <- as.numeric(data1$VideoUploads)
 data1$Subscribers <- as.numeric(data1$Subscribers)
@@ -170,7 +177,8 @@ library(knitr)
 kable(prob_1, caption = "Probability of the rank of a channel being in the top 150 with less than 1000 subscribers")
 ```
 
-####Here is how the probability of the rank of a channel being in the top 150 of its rank while having less than 1000 subscribers. While I was analyzing the data, I wanted to compare the channels with the highest grades, and being that the grade corresponds to the rank of the channel, the top 150 ranked channels correspons to the highest grades. Also, The is a larger than expected range of subscribers being less than 100 people. They are still however, seeing a substantial amount of views from YouTube users. 
+####Comments
+Here is how the probability of the rank of a channel being in the top 150 of its rank while having less than 1000 subscribers. While I was analyzing the data, I wanted to compare the channels with the highest grades, and being that the grade corresponds to the rank of the channel, the top 150 ranked channels correspons to the highest grades. Also, The is a larger than expected range of subscribers being less than 100 people. They are still however, seeing a substantial amount of views from YouTube users. 
 
 ```{r}
  ggplot(data = J_data1)+
@@ -180,7 +188,8 @@ kable(prob_1, caption = "Probability of the rank of a channel being in the top 1
 
    labs(title = "Rank based on Grade w/ Number of Subs")
 ```
-####This plot is representative of said rank in correlation to the channels that are ranked in the top 150 have also been graded the highest as well. The highest of the grades were A++, A+, and A that I have included in the data for the ranking. I took this data and compared it with the unforseen amount of subscribers. There was a high probability being shows with channels that receive higher grades, while having less than 1000 subscribers. Posing question would be how do they maintain such a high ranking with such a low amount of subscribers? This number actually is then accurately, or more appropriately represented by the number of views that the channel recieves.  
+####Comments
+This plot is representative of said rank in correlation to the channels that are ranked in the top 150 have also been graded the highest as well. The highest of the grades were A++, A+, and A that I have included in the data for the ranking. I took this data and compared it with the unforseen amount of subscribers. There was a high probability being shows with channels that receive higher grades, while having less than 1000 subscribers. Posing question would be how do they maintain such a high ranking with such a low amount of subscribers? This number actually is then accurately, or more appropriately represented by the number of views that the channel recieves.  
 
 
 ###Overall Summary Of Group Work

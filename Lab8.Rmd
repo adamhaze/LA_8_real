@@ -28,15 +28,20 @@ Channel name = The name of the YouTube channel.
 Video Uploads = Total number of videos uploaded by the YouTube channel.
 Subscribers = Total number of subscribers of the YouTube channel.
 Video views = Total number of views of all the video content by the YouTube channel.
-RankBasedOnSubscriberRate = The rank of Youtube channel based on # of Subscribers 
-rate = rate of subscribers per upload
+RankBasedOnSubscriberRate = The rank of Youtube channel based on # of Subscribers .
+rate = rate of subscribers per upload.
+Jasmine_Data = Jasmine's import of the data to tidy and manipulate.
+J_data1 = Imported data with changed names of columns.
+subs = number of channels with less than 1000 subscribers.
+high_rank = highest ranking channels with the highest grades, the top 150 YouTube Channels.
+prob_1 = the number of 'subs' over the number of 'high_rank' YouTube channels.
 
 
 ###Domain Expert
 Our domain expert is the CEO of YouTube, and he wants to know what factors are leading to certain YouTube channels becoming more successful based on Socialblade's rankings.  It is interesting to him what a major blogger company like Socialblade finds important in certain YouTube channels because he believes it influences the way users look at and evaluate channels.  He wants to know which channels he should focus his sponsorships towards in order to increase YouTube's overall success.  
 
 ###Conclusion
-We found that, independently, the # of uploads and # of subscribers has little effect on the overall ranking, or success, of a YouTube channel. But, from our data we would conclude that YouTube channels with less uploads and more subscribers, so a higher subscriber to upload rate tend to be more successful.  This is because channels are more successful when they put out higher quality uploads, rather than just mass uploading videos.  These channels are generating much higher subscriber numbers with less video uploads, therefore they are becoming much more successful much quicker.
+We found that, independently, the # of uploads and # of subscribers has little effect on the overall ranking, or success, of a YouTube channel. But, from our data we can conclude that YouTube channels with less uploads and more subscribers, those with a higher subscriber to upload rate, tend to be more successful.  This is because channels are more successful when they put out higher quality uploads, rather than just mass uploading videos.  These channels are generating much higher subscriber numbers with less video uploads, therefore they are becoming much more successful much quicker. They are also becoming much more succesfull more quickly due to the amount of views that they are getting. While the number of subscribers does not increase, the views per video substantially increases which is due to the cirrcukation of content. This can be through not just their social media platform but through others like Twitter and Facebook as well. 
 
 ###Recommendation
 
@@ -134,7 +139,49 @@ dataYoutube1 <- dataYoutube %>%
 ####Comments
 As depicted from the graph above, the top 1000 youtube channels (based on rank) were being compared to the number of subscribers they have. The graph depicts a highly scattered output which shows that there is no significant effect of the number of subscribers on a Youtube channels' rank (based on socialblade's rankings). I also utilized "position" = "jitter" to help with visualiztion of the plots on the graph.
 
+###Jasmine's Findings
+
+```{r}
+Jasmine_Data <- read.csv('file:///C:/Users/sanch/OneDrive/Documents/R/Lab 8/data.csv')
+
+J_data1 <- Jasmine_Data %>%
+  rename(Videos = "Video.Uploads", View_amt = "Video.views")
+
+J_data1$Rank <- as.numeric(J_data1$Rank)
+
+J_data1$Subscribers <- as.numeric(J_data1$Subscribers)
+
+
+subs <- J_data1%>%
+    filter(Subscribers < 1000)%>%
+    count()
+
+high_rank <- J_data1%>%
+  filter(Rank < 151)%>%
+  count()
+
+prob_1 <- subs/high_rank
+prob_1
+
+```
+
+```{r echo=FALSE, results = 'asis'}
+library(knitr)
+kable(prob_1, caption = "Probability of the rank of a channel being in the top 150 with less than 1000 subscribers")
+```
+
+####Here is how the probability of the rank of a channel being in the top 150 of its rank while having less than 1000 subscribers. While I was analyzing the data, I wanted to compare the channels with the highest grades, and being that the grade corresponds to the rank of the channel, the top 150 ranked channels correspons to the highest grades. Also, The is a larger than expected range of subscribers being less than 100 people. They are still however, seeing a substantial amount of views from YouTube users. 
+
+```{r}
+ ggplot(data = J_data1)+
+  geom_point(mapping = aes(x = Rank, y = Subscribers), na.rm = TRUE)+ 
+   xlim(0,150)+
+   ylim(0,1000)+
+
+   labs(title = "Rank based on Grade w/ Number of Subs")
+```
+####This plot is representative of said rank in correlation to the channels that are ranked in the top 150 have also been graded the highest as well. The highest of the grades were A++, A+, and A that I have included in the data for the ranking. I took this data and compared it with the unforseen amount of subscribers. There was a high probability being shows with channels that receive higher grades, while having less than 1000 subscribers. Posing question would be how do they maintain such a high ranking with such a low amount of subscribers? This number actually is then accurately, or more appropriately represented by the number of views that the channel recieves.  
+
 
 ###Overall Summary Of Group Work
-The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. Richard also created a graph depicting a relatively random relationship among subscribers and the Socialblade ranking it was assigned. This means that there was no significant effect on ranking just based on the amount of subscribers a Youtube channel had.This why Richard's plot showed no patterns and was highly scattered.
-Adam typed out the introduction section and helped with the conclusion. In his section he imported the data with fread(), and changed a couple variable names using rename() and changed the type of certain variables from chr to dbl by using as.numeric(). He also separated the Rank column by taking off the last two characters, and then using the select() func to remove that column so that the rank column could be converted to a double. He also used the mutate function to add a rate variable that divided the Subscribers by the # of uploads for each channel.  He then used ggplot to plot 2 different comparisons based on number of uploads.
+The group members overall contributed equally to the team project. Erin created a graph to show the visual relationship between the Subscriber Viewer rate and the number of views on a video for the youtuber creators. She discovered that there is a minimal correlation between the rate and the views per video, but a correlation in the beginning. My implementing bounds on her graph, it allows for a 'zoomed' in outlook on the relationships. We are able to see that the rate of Subscriber views is at the highest in the beginning, when youtubers are just starting their creations on youtube. So, inevitably, the rate will be higher. Richard also created a graph depicting a relatively random relationship among subscribers and the Socialblade ranking it was assigned. This means that there was no significant effect on ranking just based on the amount of subscribers a Youtube channel had.This why Richard's plot showed no patterns and was highly scattered.Adam typed out the introduction section and helped with the conclusion. In his section he imported the data with fread(), and changed a couple variable names using rename() and changed the type of certain variables from chr to dbl by using as.numeric(). He also separated the Rank column by taking off the last two characters, and then using the select() func to remove that column so that the rank column could be converted to a double. He also used the mutate function to add a rate variable that divided the Subscribers by the # of uploads for each channel.  He then used ggplot to plot 2 different comparisons based on number of uploads.Jasmine contributed to the conclusion and while she also compared data from the subscribers and the rankings of the channel, she took a closer look at how those rankings corresponded to grades by comparing them to rank values only in the top 150 and subscriber numbers within those rankings that were less than 1000. She then made a suggestion that they do not have a direct correlation becuase there are gaps in the data, however the number of views per channel more closesly relates to its rank and grade. 
